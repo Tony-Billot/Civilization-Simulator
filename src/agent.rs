@@ -11,9 +11,7 @@ pub fn move_agent(agent: &mut Agent, direction: (i32, i32)) {
     );
 }
 
-pub fn starve_agents(agents: &mut Vec<Agent>) {
-    for agent in agents {
-        agent.food -= 0.1;
-        agent.water -= 0.1;
-    }
+pub fn starve_agent(agent: &mut Agent) {
+    agent.food -= 0.1;
+    agent.water -= 0.1;
 }

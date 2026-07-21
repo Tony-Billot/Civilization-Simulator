@@ -1,7 +1,7 @@
 mod agent;
 use agent::Agent;
 use agent::move_agent;
-use agent::starve_agents;
+use agent::starve_agent;
 
 fn main() {
     let mut day: i32 = 0;
@@ -25,5 +25,11 @@ fn main() {
         if day == 30 {
             break;
         }
+    }
+}
+
+fn starve_agents(agents: &mut Vec<Agent>) {
+    for agent in agents {
+        starve_agent(agent);
     }
 }
