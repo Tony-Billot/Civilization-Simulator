@@ -4,6 +4,8 @@ pub struct Agent {
     pub water: f32,
 }
 
+
+
 pub fn move_agent(agent: &mut Agent, direction: (i32, i32)) {
     agent.position = (
         agent.position.0 + direction.0,
@@ -12,6 +14,6 @@ pub fn move_agent(agent: &mut Agent, direction: (i32, i32)) {
 }
 
 pub fn starve_agent(agent: &mut Agent) {
-    agent.food -= 0.1;
-    agent.water -= 0.1;
+    agent.food -= 1.0;
+    agent.water -= 2.0;
 }
