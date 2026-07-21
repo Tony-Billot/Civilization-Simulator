@@ -25,8 +25,8 @@ fn main() {
 
         for agent in &mut world.agents {
             println!("Agent at position: {:?}, food: {}, water: {}", agent.position, agent.food, agent.water);
+            starve_agent(agent); 
         }
-        starve_agents(&mut world.agents);
 
         world.agents.retain(|agent| {
         if agent.food <= 0.0 || agent.water <= 0.0 {
@@ -46,11 +46,5 @@ fn main() {
         if day == 30 {
             break;
         }
-    }
-}
-
-fn starve_agents(agents: &mut Vec<Agent>) {
-    for agent in agents {
-        starve_agent(agent);
     }
 }
