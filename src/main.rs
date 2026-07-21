@@ -1,5 +1,7 @@
 mod agent;
 use agent::Agent;
+use agent::move_agent;
+use agent::starve_agents;
 
 fn main() {
     let mut day: i32 = 0;
@@ -16,11 +18,9 @@ fn main() {
         println!("We are in the day: {}", day);
 
         for agent in &mut agents {
-            println!(
-                "Agent at position: {:?}, food: {}, water: {}",
-                agent.position, agent.food, agent.water
-            );
+            println!("Agent at position: {:?}, food: {}, water: {}", agent.position, agent.food, agent.water);
         }
+        starve_agents(&mut agents);
 
         if day == 30 {
             break;
