@@ -7,9 +7,16 @@ use crate::agent::decide_agent;
 
 mod world_objects;
 
+use std::fs;
+use serde_json::Value;
+
 
 fn main() {
     let mut world: world::World = world::createDebugWorld();
+
+    let content = fs::read_to_string("simulation.config");
+    print!("Reading simulation.config file...\n");
+    print!("File content: {}\n", content.as_ref().unwrap());
 
     world.agents.push(Agent {
         position: (0, 0),
