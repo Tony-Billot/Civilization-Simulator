@@ -1,5 +1,5 @@
 use crate::{world_objects::FoodSource, world_objects::WaterSource};
-use rand::Rng;
+use rand::RngExt;
 
 pub struct Agent {
     pub position: (i32, i32),
@@ -71,8 +71,8 @@ pub fn search_for_water(agent: &mut Agent, water_sources: &[WaterSource]) {
 }
 
 pub fn random_move(agent: &mut Agent) {
-    let mut rng = rand::thread_rng();
-    let direction = match rng.gen_range(0..4) {
+    let mut rng = rand::rng();
+    let direction = match rng.random_range(0..4) {
         0 => (1, 0),
         1 => (-1, 0),
         2 => (0, 1),
