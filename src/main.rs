@@ -14,27 +14,29 @@ use serde_json::Value;
 fn main() {
     let mut world: world::World = world::createDebugWorld();
 
-    let content = fs::read_to_string("simulation.config");
+    let content = fs::read_to_string("simulation.config").unwrap();
     print!("Reading simulation.config file...\n");
-    print!("File content: {}\n", content.as_ref().unwrap());
+    print!("File content: {}\n", content);
+    let json: serde_json::Value = serde_json::from_str(&content).unwrap();
 
-    world.agents.push(Agent {
-        position: (0, 0),
-        food: 10.0,
-        water: 10.0,
-    });
+    println!("{}", json["agents"]);
 
-    world.agents.push(Agent {
-        position: (1, 2),
-        food: 10.0,
-        water: 10.0,
-    });
+    let days: i32 = json["days"].as_i64().unwrap() as i32;
 
-    world.agents.push(Agent {
-        position: (3, 4),
-        food: 10.0,
-        water: 10.0,
-    });
+    let agents = json["agents"].as_array().unwrap();
+    for agent in agents {
+        let position = agent["position"].as_array().unwrap();
+        let x = position[0].as_i64().unwrap() as i32;
+        let y = position[1].as_i64().unwrap() as i32;
+        let food = agent["food"].as_f64().unwrap() as f32;
+        let water = agent["water"].as_f64().unwrap() as f32;
+
+        world.agents.push(Agent {
+            position: (x, y),
+            food,
+            water,
+        });
+    }
 
     loop {
         world.day += 1;
@@ -61,8 +63,8 @@ fn main() {
             break;
         }
 
-        if world.day == 30 {
-            println!("Simulation ended after 30 days. Everyone survived !");
+        if world.day == days {
+            println!("Simulation ended after {} days. Everyone survived !", days);
             break;
         }
     }
