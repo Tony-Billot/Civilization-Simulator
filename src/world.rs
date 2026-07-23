@@ -27,5 +27,5 @@ pub fn createDebugWorld() -> World{
         water: 100.0,
     });
 
-    world
+    return world;
 }

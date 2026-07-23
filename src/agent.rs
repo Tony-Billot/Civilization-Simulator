@@ -1,4 +1,4 @@
-use crate::{world::World, world_objects::FoodSource, world_objects::WaterSource};
+use crate::{world_objects::FoodSource, world_objects::WaterSource};
 use rand::Rng;
 
 pub struct Agent {
@@ -54,6 +54,8 @@ pub fn search_for_food(agent: &mut Agent, food_sources: &[FoodSource]) {
         }
     }
     println!("Agent at position: {:?} did not find any food.", agent.position);
+
+    random_move(agent);
 }
 
 pub fn search_for_water(agent: &mut Agent, water_sources: &[WaterSource]) {
@@ -65,6 +67,7 @@ pub fn search_for_water(agent: &mut Agent, water_sources: &[WaterSource]) {
         }
     }
     println!("Agent at position: {:?} did not find any water.", agent.position);
+    random_move(agent);
 }
 
 pub fn random_move(agent: &mut Agent) {
